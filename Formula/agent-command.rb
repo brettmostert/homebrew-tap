@@ -1,8 +1,8 @@
 class AgentCommand < Formula
   desc "Sidebar and status tracker for Claude Code sessions in Kitty and Ghostty"
   homepage "https://github.com/brettmostert/homebrew-tap"
-  url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v0.32.1/agent-command_0.32.1_darwin_all.tar.gz"
-  sha256 "6a62d1eb54409819614a4b2da051bb29deeab69b3b58a32f0e966a79e889e966"
+  url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v0.33.0/agent-command_0.33.0_darwin_all.tar.gz"
+  sha256 "fc27a67c67fc649d28d09d9975991049c0aaf23d195a580d53ce8e9b127d41d2"
   license "MIT"
 
   depends_on :macos
