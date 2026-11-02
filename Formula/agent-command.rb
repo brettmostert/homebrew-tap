@@ -1,8 +1,8 @@
 class AgentCommand < Formula
   desc "Sidebar and status tracker for Claude Code sessions in Kitty and Ghostty"
   homepage "https://github.com/brettmostert/homebrew-tap"
-  url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v0.30.1/agent-command_0.30.1_darwin_all.tar.gz"
-  sha256 "201a088c2fbc82fc64e5c8aba724a8882545dbece6acdecdcd72eee6421cf96e"
+  url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v0.31.1/agent-command_0.31.1_darwin_all.tar.gz"
+  sha256 "87a4f99d2d9ef46396618ce2b9ca871d02970a7f5f498cc9486c7e45ed582889"
   license "MIT"
 
   depends_on :macos
@@ -10,6 +10,8 @@ class AgentCommand < Formula
   def install
     bin.install "agent-command"
     bin.install_symlink "agent-command" => "acmd"
+    # the Swift speech engine (acmd finds it in ../libexec)
+    libexec.install "acmd-speech"
     generate_completions_from_executable(bin/"agent-command", "completion")
   end
 
@@ -23,5 +25,6 @@ class AgentCommand < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/agent-command version")
     assert_match version.to_s, shell_output("#{bin}/acmd version")
+    assert_match "acmd-speech", shell_output("#{libexec}/acmd-speech --version")
   end
 end
