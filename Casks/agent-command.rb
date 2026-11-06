@@ -1,0 +1,56 @@
+cask "agent-command" do
+  version "0.34.0"
+  sha256 "cb32f7c090795d2cad96fad072507286c4e796e214b5e3aac96bdb3d61e39e25"
+
+  url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/AgentCommand.zip"
+  name "Agent Command"
+  desc "Native app that runs Claude Code sessions and terminals in panes, with live status"
+  homepage "https://github.com/brettmostert/homebrew-tap"
+
+  depends_on arch: :arm64
+  depends_on macos: :sonoma
+
+  app "Agent Command.app"
+  binary "#{appdir}/Agent Command.app/Contents/MacOS/agent-command"
+  binary "#{appdir}/Agent Command.app/Contents/MacOS/agent-command", target: "acmd"
+
+  # Runs before Homebrew moves the app, so it clears the quarantine flag on the
+  # staged copy and names the final path for the hooks. Without that flag cleared,
+  # macOS kills the binary and removes the app. A failure here mustn't fail the
+  # install: the app offers its hooks on launch.
+  installer script: {
+    executable: "/bin/sh",
+    args:       [
+      "-c",
+      '/usr/bin/xattr -dr com.apple.quarantine "$0" && "$0/Contents/MacOS/agent-command" init --hook-binary "$1" || true',
+      "#{staged_path}/Agent Command.app",
+      "#{appdir}/Agent Command.app/Contents/MacOS/agent-command",
+    ],
+  }
+
+  # Upgrades run this too. It only ends sessions for a real uninstall.
+  uninstall quit:   "com.brettmostert.agent-command",
+            script: {
+              executable:   "/bin/sh",
+              args:         [
+                "-c",
+                '[ ! -x "$0" ] || "$0" uninstall --brew',
+                "#{appdir}/Agent Command.app/Contents/MacOS/agent-command",
+              ],
+              must_succeed: false,
+            }
+
+  zap trash: [
+    "~/.config/agent-command",
+    "~/.local/state/agent-command",
+  ]
+
+  caveats <<~EOS
+    Agent Command isn't notarized, so this install cleared macOS's quarantine flag
+    for it and added its Claude Code hooks. Run acmd to open it.
+
+    Uninstalling ends running sessions, stops its background service and removes
+    the hooks. Upgrades leave sessions running. Claude conversations can still be
+    resumed after an uninstall.
+  EOS
+end
