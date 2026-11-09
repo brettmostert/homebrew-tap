@@ -1,6 +1,6 @@
 cask "agent-command" do
-  version "0.42.2"
-  sha256 "c0070f90c4e88ae724c8028a2996ef43dabc4f0ae8f0c62895ccd0c436d54e0a"
+  version "0.42.3"
+  sha256 "44e2419cdebaa75506c63d810e3efa1f5ca21423b211ea1c87a4ee464ead679b"
 
   url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/AgentCommand.zip"
   name "Agent Command"
