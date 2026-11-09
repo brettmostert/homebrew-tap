@@ -1,6 +1,6 @@
 cask "agent-command" do
-  version "0.45.0"
-  sha256 "87f41017bcd6cbad43d22197fdaa486928697b82595051626529e1637a5173bb"
+  version "0.45.1"
+  sha256 "cc1797f29ccc72a3a459974f0fe47f3db124692bb55ef511c07f31c910571985"
 
   url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/AgentCommand.zip"
   name "Agent Command"
@@ -8,7 +8,7 @@ cask "agent-command" do
   homepage "https://github.com/brettmostert/homebrew-tap"
 
   depends_on arch: :arm64
-  depends_on macos: ">= :tahoe"
+  depends_on macos: :tahoe
 
   app "Agent Command.app"
   binary "#{appdir}/Agent Command.app/Contents/MacOS/agent-command"
