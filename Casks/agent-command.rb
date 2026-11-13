@@ -1,6 +1,6 @@
 cask "agent-command" do
-  version "0.49.0"
-  sha256 "d6e11e68324fe64ffcaab78ac3c45a1e51ab4283566529f537dfdca5f5acf8c3"
+  version "0.50.0"
+  sha256 "aa5f88e6070c62f1d9ac4ce570b93e57e7637bc60acf74e0143fdd98acbee94a"
 
   url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/AgentCommand.zip"
   name "Agent Command"
@@ -40,14 +40,20 @@ cask "agent-command" do
               must_succeed: false,
             }
 
-  zap trash: [
-    "~/.config/agent-command",
-    "~/.local/state/agent-command",
-  ]
+  # Only zap removes the wake rule: uninstall runs on upgrades too, and
+  # `acmd uninstall` removes it itself.
+  zap delete: "/etc/sudoers.d/agent-command",
+      trash:  [
+        "~/.config/agent-command",
+        "~/.local/state/agent-command",
+      ]
 
   caveats <<~EOS
     Agent Command isn't notarized, so this install cleared macOS's quarantine flag
     for it and added its Claude Code hooks. Run acmd to open it.
+
+    To let scheduled jobs wake the Mac shortly before they run, run
+    acmd schedule wake on (it asks for your password once).
 
     Uninstalling ends running sessions, stops its background service and removes
     the hooks. Upgrades leave sessions running. Claude conversations can still be
