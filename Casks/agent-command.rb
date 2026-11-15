@@ -1,19 +1,16 @@
 cask "agent-command" do
-  version "0.54.0"
-  sha256 "e03a91e24665e2176487dc796a2fb48e37860132d7a458690dbab64ae6390335"
+  version "0.54.1"
+  sha256 "bbbed3e159cd886fd7b2c97b862f4a672be0ece8ba7e9b184cc74b8405f63312"
 
   url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/AgentCommand.zip"
   name "Agent Command"
-  desc "Native app that runs Claude Code sessions and terminals in panes, with live status"
+  desc "Native app to run AI coding agents and terminals in panes, with live status"
   homepage "https://github.com/brettmostert/homebrew-tap"
 
   depends_on arch: :arm64
   depends_on macos: :tahoe
 
   app "Agent Command.app"
-  binary "#{appdir}/Agent Command.app/Contents/MacOS/agent-command"
-  binary "#{appdir}/Agent Command.app/Contents/MacOS/agent-command", target: "acmd"
-
   # Runs before Homebrew moves the app, so it clears the quarantine flag on the
   # staged copy and names the final path for the hooks. Without that flag cleared,
   # macOS kills the binary and removes the app. A failure here mustn't fail the
@@ -22,11 +19,14 @@ cask "agent-command" do
     executable: "/bin/sh",
     args:       [
       "-c",
-      '/usr/bin/xattr -dr com.apple.quarantine "$0" && "$0/Contents/MacOS/agent-command" init --hook-binary "$1" || true',
+      '/usr/bin/xattr -dr com.apple.quarantine "$0" && ' \
+      '"$0/Contents/MacOS/agent-command" init --hook-binary "$1" || true',
       "#{staged_path}/Agent Command.app",
       "#{appdir}/Agent Command.app/Contents/MacOS/agent-command",
     ],
   }
+  binary "#{appdir}/Agent Command.app/Contents/MacOS/agent-command"
+  binary "#{appdir}/Agent Command.app/Contents/MacOS/agent-command", target: "acmd"
 
   # Upgrades run this too. It only ends sessions for a real uninstall.
   uninstall quit:   "com.brettmostert.agent-command",
