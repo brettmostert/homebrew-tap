@@ -1,7 +1,7 @@
 class Acmd < Formula
   desc "Run AI coding agents and terminals as sessions you reach from any machine"
   homepage "https://github.com/brettmostert/homebrew-tap"
-  version "0.91.1"
+  version "0.91.2"
   license "MIT"
 
   on_macos do
@@ -10,18 +10,18 @@ class Acmd < Formula
 
     on_arm do
       url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/acmd-#{version}-darwin-arm64.tar.gz"
-      sha256 "55dafba65f78229f404f96f8f01a78a317e39e1b6c9988704c3ab8835c64997b"
+      sha256 "7a32c5a835beffe960a747803fcf44c887579253bb34a4f8534d0b41f27b0d70"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/acmd-#{version}-linux-arm64.tar.gz"
-      sha256 "c1e2865cb63e23019aa796a81840d007d528227143d2797dccad62bd6df97eb8"
+      sha256 "48d278d5c9c75e9b6f4ec28a2fd6290ca564d80d65fdbf3e5da42f8cf0a59293"
     end
     on_intel do
       url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/acmd-#{version}-linux-amd64.tar.gz"
-      sha256 "d186249f18abd25e8d942887b57beb7a3506ab85c3e175dd772ed3e04529352d"
+      sha256 "36665b551ceacd67110909bae1bdde61bbdd8a8149bfa8d5fe02d530c7edaa9e"
     end
   end
 
@@ -53,7 +53,8 @@ class Acmd < Formula
       from login on macOS. It's safe to run again. WSL2 needs systemd turned on
       for the service ([boot] systemd=true in /etc/wsl.conf).
 
-      Upgrades need nothing more: the next acmd command restarts the daemon.
+      Upgrades need nothing more: within a minute the daemon restarts on the
+      new version by itself, and sessions keep running.
 
       Before `brew uninstall acmd`, run `acmd uninstall`: it ends sessions,
       removes the service and the hooks.
