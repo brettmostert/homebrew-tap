@@ -1,6 +1,6 @@
 cask "agent-command" do
-  version "0.93.1"
-  sha256 "e6e672308dfb7e46eb009652f014f354b302e41fa2940e0d34ab85c845132fe0"
+  version "0.94.0"
+  sha256 "c41b4216e6f25db3da3b1698e4637d58d8e1e957fe99fef4c407a19d06aa4a78"
 
   url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/AgentCommand.zip"
   name "Agent Command"
@@ -47,8 +47,8 @@ cask "agent-command" do
     To let scheduled jobs wake the Mac shortly before they run, run
     acmd schedule wake on (it asks for your password once).
 
-    Upgrade the app and acmd together, with brew upgrade acmd agent-command:
-    upgrading the app alone leaves acmd as it was.
+    Upgrade with brew upgrade agent-command. Homebrew leaves acmd as it was,
+    so the app upgrades it when it next opens.
 
     Uninstalling the app leaves acmd and its sessions running. To remove acmd too,
     run acmd uninstall, then brew uninstall acmd.
