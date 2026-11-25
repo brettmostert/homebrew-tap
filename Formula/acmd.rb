@@ -1,7 +1,7 @@
 class Acmd < Formula
   desc "Run AI coding agents and terminals as sessions you reach from any machine"
   homepage "https://github.com/brettmostert/homebrew-tap"
-  version "0.93.1"
+  version "0.94.0"
   license "MIT"
 
   on_macos do
@@ -10,18 +10,18 @@ class Acmd < Formula
 
     on_arm do
       url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/acmd-#{version}-darwin-arm64.tar.gz"
-      sha256 "ff508d8de63f84ad0d44a7ddad445fb23b72b17f73baed116ac6582bc105674d"
+      sha256 "36f1db486488a5a7d9f6f84b4ae47ebf597f415ec42398eb4e0f2fdd41c16e9f"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/acmd-#{version}-linux-arm64.tar.gz"
-      sha256 "881e9dd39b53d1cf1671c41e199de2a6c2dc9d4a0916693c40bbfb46ad506294"
+      sha256 "73634c88dba8ef6c42cb56695d378d3207b876e94248ce5a89d0261d78d36699"
     end
     on_intel do
       url "https://github.com/brettmostert/homebrew-tap/releases/download/agent-command-v#{version}/acmd-#{version}-linux-amd64.tar.gz"
-      sha256 "7e589b0baf7aca2d87ae75779450ea7e9c519abf29c8b681a84286f1c35d43cd"
+      sha256 "f26527a187935d5df8dc56bc316d28581637442a9b1fa74c5c132e5f2a2b417c"
     end
   end
 
